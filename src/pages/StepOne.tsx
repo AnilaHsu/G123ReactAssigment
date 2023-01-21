@@ -12,10 +12,10 @@ const StepOne = (): JSX.Element => {
   const peopleNumber: number = useAppSelector(
     (state) => state.OrderMenu.peopleNumber
   );
-  const options = availableMeals.map((option, index) => {
+  const mealOptions: JSX.Element[] = availableMeals.map((meal, index) => {
     return (
-      <option key={index} value={option}>
-        {option}
+      <option key={index} value={meal}>
+        {meal}
       </option>
     );
   });
@@ -31,7 +31,7 @@ const StepOne = (): JSX.Element => {
         <option key={-1} value="" disabled>
           Please select a meal
         </option>
-        {options}
+        {mealOptions}
       </select>
       <input
         type="number"
