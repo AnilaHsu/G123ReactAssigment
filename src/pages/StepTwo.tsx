@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectRestaurant } from "../app/OrderMenuSlice";
+import Selector from "../components/Selector";
 
 const StepTwo = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -9,28 +10,27 @@ const StepTwo = (): JSX.Element => {
   const selectedRestaurant: string = useAppSelector(
     (state) => state.OrderMenu.selectedRestaurant
   );
-  const restaurantOptions = restaurants.map((restaurant, index) => {
-    return (
-      <option key={index} value={restaurant}>
-        {restaurant}
-      </option>
-    );
-  });
-  return (
-    <div className="w-80">
-      <select
-        className="select-bordered select w-full max-w-xs"
-        value={selectedRestaurant}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          dispatch(selectRestaurant(event.target.value));
-        }}
-      >
-        <option key={-1} value="" disabled>
-          Please select a restaurant
+  const restaurantOptions: JSX.Element[] = restaurants.map(
+    (restaurant, index) => {
+      return (
+        <option key={index} value={restaurant}>
+          {restaurant}
         </option>
-        {restaurantOptions}
-      </select>
-    </div>
+      );
+    }
+  );
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(selectRestaurant(event.target.value));
+  };
+  return (
+    <>
+      <Selector
+        description="Restaurant"
+        selectedValue={selectedRestaurant}
+        onChange={handleSelectChange}
+        Options={restaurantOptions}
+      />
+    </>
   );
 };
 
