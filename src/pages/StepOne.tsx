@@ -1,5 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectMeal, selectPeopleNumber } from "../app/OrderMenuSlice";
+import NumberInput from "../components/NumberInput";
+import Selector from "../components/Selector";
 
 const StepOne = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -19,29 +21,24 @@ const StepOne = (): JSX.Element => {
       </option>
     );
   });
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(selectMeal(event.target.value));
+  };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(selectPeopleNumber(Number(event.target.value)));
+  };
   return (
-    <div className="flex w-80 flex-col items-center gap-6 ">
-      <select
-        className="select-bordered select w-full max-w-xs"
-        value={selectedMeal}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          dispatch(selectMeal(event.target.value));
-        }}
-      >
-        <option key={-1} value="" disabled>
-          Please select a meal
-        </option>
-        {mealOptions}
-      </select>
-      <input
-        type="number"
-        placeholder="Please enter number of people"
-        className="input-bordered input w-full max-w-xs"
-        min="1"
-        defaultValue={peopleNumber}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          dispatch(selectPeopleNumber(Number(event.target.value)));
-        }}
+    <div className="flex flex-col items-start gap-8">
+      <Selector
+        description="meal"
+        selectedValue={selectedMeal}
+        onChange={handleSelectChange}
+        Options={mealOptions}
+      />
+      <NumberInput
+        description="Number of people"
+        value={peopleNumber}
+        onChange={handleInputChange}
       />
     </div>
   );
