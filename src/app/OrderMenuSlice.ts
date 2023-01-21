@@ -47,6 +47,18 @@ export const OrderMenuSlice = createSlice({
             .map((dish) => dish.restaurant)
         )
       );
+      state.dishes = Array.from(
+        new Set(
+          state.dishesData
+            .filter((dish) => {
+              return dish.availableMeals.includes(action.payload);
+            })
+            .filter((dish) => {
+              return dish.restaurant.includes(state.selectedRestaurant);
+            })
+            .map((dish) => dish.name)
+        )
+      );
     },
     selectPeopleNumber: (state, action: PayloadAction<number>) => {
       state.peopleNumber = action.payload;
