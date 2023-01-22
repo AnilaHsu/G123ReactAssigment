@@ -21,10 +21,10 @@ const StepOne = (): JSX.Element => {
       </option>
     );
   });
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleMealChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(selectMeal(event.target.value));
   };
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePeopleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(selectPeopleNumber(Number(event.target.value)));
   };
   return (
@@ -32,13 +32,13 @@ const StepOne = (): JSX.Element => {
       <Selector
         description="meal"
         selectedValue={selectedMeal}
-        onChange={handleSelectChange}
+        onChange={handleMealChange}
         Options={mealOptions}
       />
       <NumberInput
         description="Number of people"
         value={peopleNumber}
-        onChange={handleInputChange}
+        onChange={handlePeopleChange}
       />
     </div>
   );

@@ -19,7 +19,9 @@ const StepTwo = (): JSX.Element => {
       );
     }
   );
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleRestaurantChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     dispatch(selectRestaurant(event.target.value));
   };
   return (
@@ -27,7 +29,7 @@ const StepTwo = (): JSX.Element => {
       <Selector
         description="Restaurant"
         selectedValue={selectedRestaurant}
-        onChange={handleSelectChange}
+        onChange={handleRestaurantChange}
         Options={restaurantOptions}
       />
     </>
