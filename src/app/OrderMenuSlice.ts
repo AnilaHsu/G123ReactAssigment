@@ -1,20 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import data from "../data/dishes.json";
 import {
-  DishAndServings,
-  DishChangeArg,
+  DishOrderItem,
   OrderMenuState,
-  ServingsChangeArg,
 } from "../../src/type";
 
 const initialState: OrderMenuState = {
   dishesData: data.dishes,
+  step: 1,
   selectedMeal: "",
-  availableMeals: ["breakfast", "lunch", "dinner"],
   peopleNumber: 1,
   selectedRestaurant: "",
   availableRestaurants: [],
-  allDishesAndServings: [{ dish: "", servingsNumber: 1 }],
+  dishOrderList: [{ dish: "", servingsNumber: 1 }],
   availableDishes: [],
 };
 
@@ -22,6 +20,9 @@ export const OrderMenuSlice = createSlice({
   name: "OrderMenu",
   initialState,
   reducers: {
+    setStep: (state, action: PayloadAction<number>) => {
+      state.step = action.payload;
+    },
     selectMeal: (state, action: PayloadAction<string>) => {
       state.selectedMeal = action.payload;
       state.availableRestaurants = Array.from(
@@ -64,33 +65,21 @@ export const OrderMenuSlice = createSlice({
         )
       );
     },
-    addDishAndServing: (state, action: PayloadAction<DishAndServings>) => {
-      const newDishesAndServings = [...state.allDishesAndServings];
-      newDishesAndServings.push(action.payload);
-      state.allDishesAndServings = newDishesAndServings;
-    },
-    selectDish: (state, action: PayloadAction<DishChangeArg>) => {
-      const selectedDish = action.payload.value;
-      const newDishesAndServings = [...state.allDishesAndServings];
-      newDishesAndServings[action.payload.index].dish = selectedDish;
-      state.allDishesAndServings = newDishesAndServings;
-    },
-    selectServingsNumber: (state, action: PayloadAction<ServingsChangeArg>) => {
-      const selectedServingsNumber = action.payload.value;
-      const newDishesAndServings = [...state.allDishesAndServings];
-      newDishesAndServings[action.payload.index].servingsNumber =
-        selectedServingsNumber;
-      state.allDishesAndServings = newDishesAndServings;
+    setDishOrderList: (
+      state,
+      action: PayloadAction<DishOrderItem[]>
+    ) => {
+      const newDishesAndServingsList = [...action.payload];
+      state.dishOrderList = newDishesAndServingsList;
     },
   },
 });
 
 export const {
+  setStep,
   selectMeal,
   selectPeopleNumber,
   selectRestaurant,
-  addDishAndServing,
-  selectDish,
-  selectServingsNumber,
+  setDishOrderList,
 } = OrderMenuSlice.actions;
 export default OrderMenuSlice.reducer;

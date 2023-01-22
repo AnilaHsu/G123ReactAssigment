@@ -1,45 +1,22 @@
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StepOne from "./pages/StepOne";
 import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
 import StepFour from "./pages/StepFour";
+import { useAppSelector } from "./app/hooks";
 
 const App = () => {
-  const [step, setStep] = useState<number>(1);
-
-  const previousButton: JSX.Element = (
-    <button
-      className="btn"
-      onClick={() => {
-        setStep(step - 1);
-      }}
-    >
-      Previous
-    </button>
-  );
-
-  const nextButton: JSX.Element = (
-    <button
-      className="btn"
-      onClick={() => {
-        setStep(step + 1);
-      }}
-    >
-      Next
-    </button>
-  );
-  const submitButton: JSX.Element = <button className="btn">Submit</button>;
+  const step = useAppSelector((state) => state.step);
   const stepElements: JSX.Element[] = [1, 2, 3, 4].map((i) => {
     return (
-      <li key={i} className={`${i <= step ? "step-primary" : ""} step`}>
-        Step {i}
+      <li key={i} className={`${i <= step ? "step-info" : ""}  step`}>
+        {i < 4 ? `Step ${i}` : "Review"}
       </li>
     );
   });
   return (
-    <div className="flex flex-col items-center space-y-20 p-10">
-      <ul className="steps">{stepElements}</ul>
+    <div className="flex flex-col items-center space-y-20 p-20 ">
+      <ul className="steps w-80">{stepElements}</ul>
       <BrowserRouter>
         <Routes location={`/${step}`}>
           <Route path={`/1`} element={<StepOne />} />
@@ -48,12 +25,6 @@ const App = () => {
           <Route path={`/4`} element={<StepFour />} />
         </Routes>
       </BrowserRouter>
-      <div className="flex w-1/2">
-        {step > 1 ? previousButton : ""}
-        <div className="grow" />
-        {step < 4 ? nextButton : ""}
-        {step === 4 ? submitButton : ""}
-      </div>
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import OrderMenuReducer from "./OrderMenuSlice";
+import orderMenuReducer from "./OrderMenuSlice";
+import thunk from "redux-thunk";
 
 export const store = configureStore({
-  reducer: {
-    OrderMenu: OrderMenuReducer,
-  },
+  reducer: orderMenuReducer,
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: [thunk],
 });
 
 export type AppDispatch = typeof store.dispatch;
