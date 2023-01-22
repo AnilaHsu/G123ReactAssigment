@@ -1,24 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import data from "../data/dishes.json";
-
-interface dishesData {
-  id: number;
-  name: string;
-  restaurant: string;
-  availableMeals: string[];
-}
-
-interface OrderMenuState {
-  dishesData: dishesData[];
-  selectedMeal: string;
-  availableMeals: string[];
-  peopleNumber: number;
-  selectedRestaurant: string;
-  restaurants: string[];
-  selectedDish: string;
-  dishes: string[];
-  servingsNumber: number;
-}
+import {
+  DishAndServings,
+  DishChangeArg,
+  OrderMenuState,
+  ServingsChangeArg,
+} from "../../src/type";
 
 const initialState: OrderMenuState = {
   dishesData: data.dishes,
@@ -26,10 +13,9 @@ const initialState: OrderMenuState = {
   availableMeals: ["breakfast", "lunch", "dinner"],
   peopleNumber: 1,
   selectedRestaurant: "",
-  restaurants: [],
-  selectedDish: "",
-  dishes: [],
-  servingsNumber: 1,
+  availableRestaurants: [],
+  allDishesAndServings: [{ dish: "", servingsNumber: 1 }],
+  availableDishes: [],
 };
 
 export const OrderMenuSlice = createSlice({
@@ -38,7 +24,7 @@ export const OrderMenuSlice = createSlice({
   reducers: {
     selectMeal: (state, action: PayloadAction<string>) => {
       state.selectedMeal = action.payload;
-      state.restaurants = Array.from(
+      state.availableRestaurants = Array.from(
         new Set(
           state.dishesData
             .filter((dish) => {
@@ -47,7 +33,7 @@ export const OrderMenuSlice = createSlice({
             .map((dish) => dish.restaurant)
         )
       );
-      state.dishes = Array.from(
+      state.availableDishes = Array.from(
         new Set(
           state.dishesData
             .filter((dish) => {
@@ -65,7 +51,7 @@ export const OrderMenuSlice = createSlice({
     },
     selectRestaurant: (state, action: PayloadAction<string>) => {
       state.selectedRestaurant = action.payload;
-      state.dishes = Array.from(
+      state.availableDishes = Array.from(
         new Set(
           state.dishesData
             .filter((dish) => {
@@ -78,11 +64,23 @@ export const OrderMenuSlice = createSlice({
         )
       );
     },
-    selectDish: (state, action: PayloadAction<string>) => {
-      state.selectedDish = action.payload;
+    addDishAndServing: (state, action: PayloadAction<DishAndServings>) => {
+      const newDishesAndServings = [...state.allDishesAndServings];
+      newDishesAndServings.push(action.payload);
+      state.allDishesAndServings = newDishesAndServings;
     },
-    selectServingsNumber: (state, action: PayloadAction<number>) => {
-      state.servingsNumber = action.payload;
+    selectDish: (state, action: PayloadAction<DishChangeArg>) => {
+      const selectedDish = action.payload.value;
+      const newDishesAndServings = [...state.allDishesAndServings];
+      newDishesAndServings[action.payload.index].dish = selectedDish;
+      state.allDishesAndServings = newDishesAndServings;
+    },
+    selectServingsNumber: (state, action: PayloadAction<ServingsChangeArg>) => {
+      const selectedServingsNumber = action.payload.value;
+      const newDishesAndServings = [...state.allDishesAndServings];
+      newDishesAndServings[action.payload.index].servingsNumber =
+        selectedServingsNumber;
+      state.allDishesAndServings = newDishesAndServings;
     },
   },
 });
@@ -91,6 +89,7 @@ export const {
   selectMeal,
   selectPeopleNumber,
   selectRestaurant,
+  addDishAndServing,
   selectDish,
   selectServingsNumber,
 } = OrderMenuSlice.actions;
