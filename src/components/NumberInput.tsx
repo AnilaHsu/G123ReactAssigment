@@ -1,8 +1,4 @@
-interface InputType {
-  description: string;
-  value: number;
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-}
+import { InputType } from "../type";
 
 const NumberInput = ({ description, value, onChange }: InputType) => {
   return (

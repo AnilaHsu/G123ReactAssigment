@@ -1,9 +1,4 @@
-interface SelectorType {
-  description: string;
-  selectedValue: string;
-  onChange: React.ChangeEventHandler<HTMLSelectElement> | undefined;
-  Options: JSX.Element[];
-}
+import { SelectorType } from "../type";
 
 const Selector = ({
   description,
