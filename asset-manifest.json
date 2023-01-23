@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/G123ReactAssignment/static/css/main.ba786ffb.css",
-    "main.js": "/G123ReactAssignment/static/js/main.cfe7a609.js",
-    "static/js/787.ced74ac3.chunk.js": "/G123ReactAssignment/static/js/787.ced74ac3.chunk.js",
-    "index.html": "/G123ReactAssignment/index.html",
-    "main.ba786ffb.css.map": "/G123ReactAssignment/static/css/main.ba786ffb.css.map",
-    "main.cfe7a609.js.map": "/G123ReactAssignment/static/js/main.cfe7a609.js.map",
-    "787.ced74ac3.chunk.js.map": "/G123ReactAssignment/static/js/787.ced74ac3.chunk.js.map"
+    "main.css": "/G123ReactAssigment/static/css/main.ba786ffb.css",
+    "main.js": "/G123ReactAssigment/static/js/main.52e7e0e8.js",
+    "static/js/787.80ae4688.chunk.js": "/G123ReactAssigment/static/js/787.80ae4688.chunk.js",
+    "index.html": "/G123ReactAssigment/index.html",
+    "main.ba786ffb.css.map": "/G123ReactAssigment/static/css/main.ba786ffb.css.map",
+    "main.52e7e0e8.js.map": "/G123ReactAssigment/static/js/main.52e7e0e8.js.map",
+    "787.80ae4688.chunk.js.map": "/G123ReactAssigment/static/js/787.80ae4688.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ba786ffb.css",
-    "static/js/main.cfe7a609.js"
+    "static/js/main.52e7e0e8.js"
   ]
 }
