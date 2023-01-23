@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import data from "../data/dishes.json";
-import {
-  DishOrderItem,
-  OrderMenuState,
-} from "../../src/type";
+import { DishOrderItem, OrderMenuState } from "../../src/type";
 
 const initialState: OrderMenuState = {
   dishesData: data.dishes,
@@ -65,10 +62,7 @@ export const OrderMenuSlice = createSlice({
         )
       );
     },
-    setDishOrderList: (
-      state,
-      action: PayloadAction<DishOrderItem[]>
-    ) => {
+    setDishOrderList: (state, action: PayloadAction<DishOrderItem[]>) => {
       const newDishesAndServingsList = [...action.payload];
       state.dishOrderList = newDishesAndServingsList;
     },

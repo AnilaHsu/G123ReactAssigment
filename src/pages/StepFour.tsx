@@ -4,9 +4,7 @@ import { DishOrderItem, OrderMenuState } from "../type";
 
 const StepFour = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const orderMenuState: OrderMenuState = useAppSelector(
-    (state) => state
-  );
+  const orderMenuState: OrderMenuState = useAppSelector((state) => state);
   const dishOrderList: DishOrderItem[] = useAppSelector(
     (state) => state.dishOrderList
   );
