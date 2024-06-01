@@ -14,7 +14,7 @@
 
 ## Description
 
-We want a multi-steps form to help users pre-order food from restaurants.
+This is a multi-step form to help users pre-order food from restaurants.
 
 ### Step 1
 
